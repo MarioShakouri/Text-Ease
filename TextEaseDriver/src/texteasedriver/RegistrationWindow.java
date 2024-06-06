@@ -84,17 +84,10 @@ public class RegistrationWindow {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
-                String password = new String(passwordField.getPassword());
-
-                // Basic validation will be changed once i create the registration class & GUI
-                if (username.isEmpty() || password.isEmpty()) {
-                    JOptionPane.showMessageDialog(registrationFrame, "Username and password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(registrationFrame, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                }
+            //open registration portal window
+            new RegistrationPortalWindow();
             }
-        });
+            });
 
         // text to speech button
         ttsButton = new JButton("Text To Speech");
@@ -106,7 +99,7 @@ public class RegistrationWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TextToSpeech tts = new TextToSpeech();
-                tts.speak("WELCOME TO THE TEXTEASE APPLICATION. Please enter username or password. To login or register.");
+                tts.speak("WELCOME TO THE TEXTEASE APPLICATION. Please enter username and password to login. Or Click register to create a new account");
             }
         });
 
