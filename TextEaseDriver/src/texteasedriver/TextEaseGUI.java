@@ -104,6 +104,9 @@ public class TextEaseGUI {
         open.addActionListener(new FileHandling.openFile(textArea));
         //save file (Mario Shakouri)
         save.addActionListener(new FileHandling.saveFile(frame, textArea));
+        
+         //adding Search feature -Haya
+        Search search = new Search(textArea);
     }
 
 }
