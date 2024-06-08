@@ -44,11 +44,13 @@ public class TextEaseGUI {
     //username and password fields
     //login, create account, tts buttons
     //new window for create account and login button
-    //when clicking login button you will acces the editor screen
+    //when clicking login button you will access the editor screen
     //JTextArea for writng, JMenuBar and add JMenu to it and JMenu items, tts, autosave, close frame button
     //File menu will have:open,save,new
     //Edit menu will have: cut,copy,paste 
     //Constructor for creating all the objects and action listener
+    
+    //Components added by-Haya styled by-Mirna
     public TextEaseGUI() {
         frame = new JFrame("TextEase");
         panel = new JPanel();

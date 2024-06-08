@@ -17,6 +17,7 @@ import javax.swing.*;
 /**
  * @author shabo
  */
+//swing components added by -Haya styled by -Mirna
 public class RegistrationWindow {
     private JFrame registrationFrame;
     private JPanel registrationPanel;
