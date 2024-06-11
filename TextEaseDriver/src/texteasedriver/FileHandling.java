@@ -85,5 +85,22 @@ public class FileHandling {
             }
         }
     }
+
+    //newFile Logic (Mario Shakouri)
+    public static class newFile implements ActionListener {
+        private JTextArea textArea;
+
+        public newFile(JTextArea textArea) {
+            this.textArea = textArea;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to create a new file? Unsaved changes will be lost.", "New File", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                textArea.setText("");
+            }
+        }
+    }
 }
 
