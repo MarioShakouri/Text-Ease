@@ -25,7 +25,7 @@ public class TextEaseGUI {
     private JPanel panel;
     private JMenuBar menuBar;
     private JMenu file, edit, tts;
-    private JMenuItem open, save, newFile, cut, copy, paste;
+    private JMenuItem open, save, newFile, cut, copy, paste, delFile;
     private JTextPane textPane;
     private JButton boldButton, italicButton, underlineButton;
     //private JTextArea textArea;
@@ -64,6 +64,7 @@ public class TextEaseGUI {
         open = new JMenuItem("Open");
         save = new JMenuItem("Save");
         newFile = new JMenuItem("New");
+        delFile = new JMenuItem("Delete");
 
         cut = new JMenuItem("Cut");
         copy = new JMenuItem("Copy");
@@ -141,6 +142,7 @@ public class TextEaseGUI {
         file.add(open);
         file.add(save);
         file.add(newFile);
+        file.add(delFile);
 
         edit.add(cut);
         edit.add(copy);
@@ -158,6 +160,12 @@ public class TextEaseGUI {
         open.addActionListener(new FileHandling.openFile(textPane));
         // Save file (Mario Shakouri)
         save.addActionListener(new FileHandling.saveFile(frame, textPane));
+
+        //Add new file(Ricardo Quinonez)
+        newFile.addActionListener(new FileHandling.createFile(frame));
+
+        //Delete a file(Ricardo Quinonez)
+        delFile.addActionListener(new FileHandling.deleteFile(frame));
 
         //adding Search feature -Haya
         Search search = new Search(textPane);
