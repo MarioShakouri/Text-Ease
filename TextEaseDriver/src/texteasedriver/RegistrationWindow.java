@@ -25,7 +25,7 @@ public class RegistrationWindow {
     private JPasswordField passwordField;
     private JLabel username, password;
     private JButton loginButton, createAccount, ttsButton;
-    
+
     public RegistrationWindow() {
 
         //initialize frame
@@ -37,43 +37,43 @@ public class RegistrationWindow {
         registrationPanel.setBackground(new Color(159, 147, 147));
 
 
-  //username styling-ms
-  username = new JLabel("Username: ");
-  username.setFont(new Font("Arial", Font.BOLD,14));
-  username.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //username styling-ms
+        username = new JLabel("Username: ");
+        username.setFont(new Font("Arial", Font.BOLD,14));
+        username.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-  usernameField = new JTextField(15);
-  usernameField.setMaximumSize(usernameField.getPreferredSize());
-  usernameField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        usernameField = new JTextField(15);
+        usernameField.setMaximumSize(usernameField.getPreferredSize());
+        usernameField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
-    //password styling-ms
-    password = new JLabel("Password: ");
-    password.setFont(new Font("Arial", Font.BOLD, 14));
-    password.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //password styling-ms
+        password = new JLabel("Password: ");
+        password.setFont(new Font("Arial", Font.BOLD, 14));
+        password.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    passwordField = new JPasswordField(15);
-    passwordField.setMaximumSize(passwordField.getPreferredSize());
-    passwordField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        passwordField = new JPasswordField(15);
+        passwordField.setMaximumSize(passwordField.getPreferredSize());
+        passwordField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    //login button styling
-    loginButton = new JButton("login");
-    loginButton.setBackground(new Color(255,243,243));
-    loginButton.setFont(new Font("Arial", Font.BOLD, 14));
-    loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //login button styling
+        loginButton = new JButton("login");
+        loginButton.setBackground(new Color(255,243,243));
+        loginButton.setFont(new Font("Arial", Font.BOLD, 14));
+        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    //action listeners
-    loginButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(usernameField.getText().equals("user")){
-                registrationFrame.dispose();
-                new TextEaseGUI();
-            } else{
-                JOptionPane.showMessageDialog(registrationFrame, "Error try again or register now", "Error", JOptionPane.ERROR_MESSAGE);
+        //action listeners
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(usernameField.getText().equals("user")){
+                    registrationFrame.dispose();
+                    new TextEaseGUI();
+                } else{
+                    JOptionPane.showMessageDialog(registrationFrame, "Error try again or register now", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
-        }
-    });
+        });
 
         // Register button styling
         JButton registerButton = new JButton("Register");
@@ -85,17 +85,17 @@ public class RegistrationWindow {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            //open registration portal window
-            new RegistrationPortalWindow();
+                //open registration portal window
+                new RegistrationPortalWindow();
             }
-            });
+        });
 
         // text to speech button
         ttsButton = new JButton("Text To Speech");
-    ttsButton.setBounds(200, 150, 150, 30);
-    ttsButton.setBackground(new Color(239, 226, 226));
-    ttsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-    //action listener
+        ttsButton.setBounds(200, 150, 150, 30);
+        ttsButton.setBackground(new Color(239, 226, 226));
+        ttsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //action listener
         ttsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,8 +112,8 @@ public class RegistrationWindow {
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(loginButton);
         buttonPanel.add(registerButton);
-      
-    //components to panel -ms
+
+        //components to panel -ms
         registrationPanel.add(username);
         registrationPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         registrationPanel.add(usernameField);
@@ -125,14 +125,14 @@ public class RegistrationWindow {
         registrationPanel.add(buttonPanel);
         registrationPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         registrationPanel.add(ttsButton);
-  
-    
-    
-   //frame setup -ms
-    registrationFrame.add(registrationPanel);
-    registrationFrame.pack(); //adjust frame to fit all components
-    registrationFrame.setLocationRelativeTo(null);
-    registrationFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    registrationFrame.setVisible(true);
-}
+
+
+
+        //frame setup -ms
+        registrationFrame.add(registrationPanel);
+        registrationFrame.pack(); //adjust frame to fit all components
+        registrationFrame.setLocationRelativeTo(null);
+        registrationFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        registrationFrame.setVisible(true);
+    }
 }

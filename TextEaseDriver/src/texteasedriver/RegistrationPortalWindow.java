@@ -11,6 +11,7 @@ public class RegistrationPortalWindow extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton submitButton;
+    private JButton backButton;
 
     public RegistrationPortalWindow() {
 
@@ -49,6 +50,13 @@ public class RegistrationPortalWindow extends JFrame {
         submitButton.setFont(new Font("Arial", Font.BOLD, 14));
         submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+
+        //Back button styling
+        backButton = new JButton("Back");
+        backButton.setBackground(new Color(255,243,243));
+        backButton.setFont(new Font("Arial", Font.BOLD,14));
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         //action listener to submit button
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -62,6 +70,16 @@ public class RegistrationPortalWindow extends JFrame {
                 JOptionPane.showMessageDialog(null, "Registration is Successful!");
             }
         });
+
+        //action listener for back button
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new RegistrationWindow();
+            }
+        });
+
         // A panel for the button with FlowLayout
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
@@ -78,7 +96,9 @@ public class RegistrationPortalWindow extends JFrame {
         registrationPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         registrationPanel.add(passwordField);
         registrationPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        registrationPanel.add(buttonPanel);
+        registrationPanel.add(submitButton);
+        registrationPanel.add(Box.createRigidArea(new Dimension(0,10)));
+        registrationPanel.add(backButton);
 
         //frame setup
         add(registrationPanel);

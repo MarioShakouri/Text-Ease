@@ -6,11 +6,7 @@ package texteasedriver;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
@@ -20,11 +16,11 @@ import javax.swing.text.Highlighter;
  * @author hayapirzada
  */ //developed by Haya
 public class Search implements KeyListener {
-    private JTextArea textArea;
+    private JTextPane textArea;
     private JTextField search;
     private String searchText;
     
-    public Search(JTextArea textArea){
+    public Search(JTextPane textArea){
         this.textArea = textArea;
     if(this.textArea != null){
         this.textArea.addKeyListener(this);

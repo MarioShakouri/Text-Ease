@@ -5,7 +5,6 @@
 package texteasedriver;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -24,9 +23,9 @@ public class FileHandling {
     // openFile Logic (Mario Shakouri)
     public static class openFile implements ActionListener {
 
-        private JTextArea textArea;
+        private JTextPane textArea;
 
-        public openFile(JTextArea textArea) {
+        public openFile(JTextPane textArea) {
             this.textArea = textArea;
         }
 
@@ -63,9 +62,9 @@ public class FileHandling {
     // saveFile Logic (Mario Shakouri)
     public static class saveFile implements ActionListener {
         private JFrame frame;
-        private JTextArea textArea;
+        private JTextPane textArea;
 
-        public saveFile(JFrame frame, JTextArea textArea) {
+        public saveFile(JFrame frame, JTextPane textArea) {
             this.frame = frame;
             this.textArea = textArea;
         }

@@ -10,15 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.io.File;
-import java.awt.Desktop;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-
 
 
 /**
@@ -27,17 +20,19 @@ import java.io.FileWriter;
  */
 public class TextEaseGUI {
 
-    //Universal varibales are the following for easy access
+    //Universal variables are the following for easy access
     private JFrame frame;
     private JPanel panel;
     private JMenuBar menuBar;
     private JMenu file, edit, tts;
     private JMenuItem open, save, newFile, cut, copy, paste;
-    private JTextArea textArea;
+    private JTextPane textPane;
+    private JButton boldButton, italicButton, underlineButton;
+    //private JTextArea textArea;
     private JScrollPane scroll;
+    private JComboBox<String> fontSizeCombo;
 
-    
-    
+
     //**
     //colors for both the registration and textEditor screen
     //registration screen
@@ -47,13 +42,14 @@ public class TextEaseGUI {
     //when clicking login button you will access the editor screen
     //JTextArea for writng, JMenuBar and add JMenu to it and JMenu items, tts, autosave, close frame button
     //File menu will have:open,save,new
-    //Edit menu will have: cut,copy,paste 
+    //Edit menu will have: cut,copy,paste
     //Constructor for creating all the objects and action listener
-    
+
     //Components added by-Haya styled by-Mirna
     public TextEaseGUI() {
         frame = new JFrame("TextEase");
         panel = new JPanel();
+        panel.setLayout(new BorderLayout());
 
         //menuBar to add the file,edit,tts components
         menuBar = new JMenuBar();
@@ -73,17 +69,73 @@ public class TextEaseGUI {
         copy = new JMenuItem("Copy");
         paste = new JMenuItem("Paste");
 
-        textArea = new JTextArea("", 30, 100);
-        textArea.setBackground(new Color(240, 239, 235));
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
+        //text pane
+        textPane = new JTextPane();
+        textPane.setBackground(new Color(240, 239, 235));
+        textPane.setCaretColor(Color.BLACK);
 
-        scroll = new JScrollPane(textArea);
+        //textArea = new JTextArea("", 30, 100);
+        //textArea.setBackground(new Color(240, 239, 235));
+        //textArea.setLineWrap(true);
+        //textArea.setWrapStyleWord(true);
 
-        panel.setLayout(new BorderLayout());
+        //scroll = new JScrollPane(textArea);
+        scroll = new JScrollPane(textPane);
+
+        //scroll pane to panel
         panel.add(scroll, BorderLayout.CENTER);
+        //scroll panel to frame
+        frame.add(panel, BorderLayout.CENTER);
+
+        //toolbar for formatting (buttons)
+        JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        // Bold button
+        boldButton = new JButton("bold!");
+        boldButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TextFormatter.bold(textPane);
+            }
+        });
+        toolbar.add(boldButton);
+
+
+        //italic button
+        italicButton = new JButton("Italic!");
+        italicButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TextFormatter.italic(textPane);
+            }
+        });
+        toolbar.add(italicButton);
+
+
+        //underline button
+        underlineButton = new JButton("Underline!");
+        underlineButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TextFormatter.underline(textPane);
+            }
+        });
+        toolbar.add(underlineButton);
+
+        //font size combo box
+        fontSizeCombo = new JComboBox<>(new String[]{"12", "14", "16", "20", "24", "32", "40"});
+        fontSizeCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int size = Integer.parseInt((String) fontSizeCombo.getSelectedItem());
+                TextFormatter.fontSize(textPane, size);
+            }
+        });
+        toolbar.add(fontSizeCombo);
+
+        panel.add(toolbar, BorderLayout.NORTH);
         frame.add(panel);
-        frame.setSize(200, 300);
+        frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
 
         file.add(open);
@@ -103,15 +155,22 @@ public class TextEaseGUI {
         frame.setVisible(true);
 
         //open file (Mario Shakouri)
-        open.addActionListener(new FileHandling.openFile(textArea));
-        //save file (Mario Shakouri)
-        save.addActionListener(new FileHandling.saveFile(frame, textArea));
-        //new file (Mario Shakouri)
-        newFile.addActionListener(new FileHandling.newFile(textArea));
-        
-         //adding Search feature -Haya
-        Search search = new Search(textArea);
+        open.addActionListener(new FileHandling.openFile(textPane));
+        // Save file (Mario Shakouri)
+        save.addActionListener(new FileHandling.saveFile(frame, textPane));
+
+        //adding Search feature -Haya
+        Search search = new Search(textPane);
+    }
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new TextEaseGUI());
     }
 
+    public JTextPane getTextPane() {
+        return textPane;
+    }
+    public JButton getBoldButton() {
+        return boldButton;
+    }
 }
 
