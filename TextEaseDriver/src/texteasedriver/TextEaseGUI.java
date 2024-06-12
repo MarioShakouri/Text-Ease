@@ -24,8 +24,8 @@ public class TextEaseGUI {
     private JFrame frame;
     private JPanel panel;
     private JMenuBar menuBar;
-    private JMenu file, edit, tts;
-    private JMenuItem open, save, newFile, cut, copy, paste, delFile;
+    private JMenu file, edit, shortcut;
+    private JMenuItem open, save, newFile, cut, copy, paste, delFile, ctrlF, cmdF;
     private JTextPane textPane;
     private JButton boldButton, italicButton, underlineButton;
     //private JTextArea textArea;
@@ -59,7 +59,7 @@ public class TextEaseGUI {
 
         edit = new JMenu("Edit");
 
-        tts = new JMenu("TTS");
+        shortcut = new JMenu("Shortcuts");
 
         open = new JMenuItem("Open");
         save = new JMenuItem("Save");
@@ -69,6 +69,9 @@ public class TextEaseGUI {
         cut = new JMenuItem("Cut");
         copy = new JMenuItem("Copy");
         paste = new JMenuItem("Paste");
+        
+        ctrlF = new JMenuItem("Ctrl + F (win):  to search");
+        cmdF = new JMenuItem("Cmd + F (macOS): to search");
 
         //text pane
         textPane = new JTextPane();
@@ -147,10 +150,13 @@ public class TextEaseGUI {
         edit.add(cut);
         edit.add(copy);
         edit.add(paste);
+        
+        shortcut.add(ctrlF);
+        shortcut.add(cmdF);
 
         menuBar.add(file);
         menuBar.add(edit);
-        menuBar.add(tts);
+        menuBar.add(shortcut);
 
         frame.setJMenuBar(menuBar);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
