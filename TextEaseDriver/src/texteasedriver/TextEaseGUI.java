@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.text.DefaultEditorKit;
 
 
 /**
@@ -66,9 +67,14 @@ public class TextEaseGUI {
         newFile = new JMenuItem("New");
         delFile = new JMenuItem("Delete");
 
-        cut = new JMenuItem("Cut");
-        copy = new JMenuItem("Copy");
-        paste = new JMenuItem("Paste");
+        cut = new JMenuItem(new DefaultEditorKit.CutAction());
+        copy = new JMenuItem(new DefaultEditorKit.CopyAction());
+        paste = new JMenuItem(new DefaultEditorKit.PasteAction());
+        
+        //set the text
+        cut.setText("Cut");
+        copy.setText("Copy");
+        paste.setText("Paste");
         
         ctrlF = new JMenuItem("Ctrl + F (win):  to search");
         cmdF = new JMenuItem("Cmd + F (macOS): to search");
