@@ -149,9 +149,6 @@ public class RegistrationWindow {
         registrationFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         registrationFrame.setVisible(true);
         
-       
-        //add logo 
-            ImageIcon image = new ImageIcon("/src/texteasedriver/logo.png");
-            registrationFrame.setIconImage(image.getImage());
+
     }
 }
