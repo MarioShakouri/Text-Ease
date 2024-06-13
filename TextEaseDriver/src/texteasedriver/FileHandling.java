@@ -20,6 +20,35 @@ import java.io.FileWriter;
 
 public class FileHandling {
 
+    private static String filePath = "autosave.txt";
+    private static Timer autoSaveTimer;
+
+    public static void autoSaveFunc(JTextPane textArea) {
+        int autoSaveInterval = 60000;
+        autoSaveTimer = new Timer(autoSaveInterval, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveToFile(filePath, textArea.getText());
+            }
+        });
+        autoSaveTimer.start();
+    }
+
+    public static void saveToFile(String filePath, String content) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void chooseSaveLocation(JFrame frame) {
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+            filePath = fileChooser.getSelectedFile().getAbsolutePath();
+        }
+    }
+    
     // openFile Logic (Mario Shakouri)
     public static class openFile implements ActionListener {
 
@@ -59,6 +88,8 @@ public class FileHandling {
         }
     }
 
+    
+
     // saveFile Logic (Mario Shakouri)
     public static class saveFile implements ActionListener {
         private JFrame frame;
@@ -68,6 +99,8 @@ public class FileHandling {
             this.frame = frame;
             this.textArea = textArea;
         }
+
+        
 
         @Override
         public void actionPerformed(ActionEvent e) {

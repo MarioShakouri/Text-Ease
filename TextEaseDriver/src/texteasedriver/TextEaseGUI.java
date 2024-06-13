@@ -4,15 +4,14 @@
  */
 package texteasedriver;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.text.DefaultEditorKit;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 /**
@@ -32,7 +31,6 @@ public class TextEaseGUI {
     //private JTextArea textArea;
     private JScrollPane scroll;
     private JComboBox<String> fontSizeCombo;
-
 
     //**
     //colors for both the registration and textEditor screen
@@ -127,6 +125,15 @@ public class TextEaseGUI {
         });
         toolbar.add(underlineButton);
 
+        JButton countButton = new JButton("Word Count");
+        countButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TextFormatter.openWordCountWindow(textPane);
+            }
+        });
+        toolbar.add(countButton);
+
         //font size combo box
         fontSizeCombo = new JComboBox<>(new String[]{"12", "14", "16", "20", "24", "32", "40"});
         fontSizeCombo.addActionListener(new ActionListener() {
@@ -176,7 +183,10 @@ public class TextEaseGUI {
 
         //adding Search feature -Haya
         Search search = new Search(textPane);
+
+        FileHandling.autoSaveFunc(textPane);
     }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new TextEaseGUI());
     }
@@ -188,4 +198,3 @@ public class TextEaseGUI {
         return boldButton;
     }
 }
-
