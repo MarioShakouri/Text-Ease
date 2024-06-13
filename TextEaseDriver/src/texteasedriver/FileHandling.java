@@ -101,5 +101,62 @@ public class FileHandling {
             }
         }
     }
-}
 
+
+    /**
+     * Author
+     * Ricardo Quinonez
+     *
+     */
+    public static class createFile implements ActionListener {
+        private JFrame frame;
+        public createFile(JFrame frame) {
+            this.frame = frame;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+            int result = fileChooser.showSaveDialog(frame);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                try {
+                    if (file.createNewFile()) {
+                        JOptionPane.showMessageDialog(frame, "File created successfully: " + file.getName());
+                        // change that last line after testing
+
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "File already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(frame, "Error creating file: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+
+    /**
+     * Author
+     * Ricardo Quinonez
+     *
+     */
+    public static class deleteFile implements ActionListener {
+        private JFrame frame;
+        public deleteFile(JFrame frame) {
+            this.frame = frame;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+            int result = fileChooser.showOpenDialog(frame);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                if (file.delete()) {
+                    JOptionPane.showMessageDialog(frame, "File deleted successfully, YAY IT WORKS!!");
+                    // change that last line after testing
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Failed to delete the file.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+}

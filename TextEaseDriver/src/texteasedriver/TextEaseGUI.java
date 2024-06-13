@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.text.DefaultEditorKit;
 
 
 /**
@@ -24,8 +25,8 @@ public class TextEaseGUI {
     private JFrame frame;
     private JPanel panel;
     private JMenuBar menuBar;
-    private JMenu file, edit, tts;
-    private JMenuItem open, save, newFile, cut, copy, paste;
+    private JMenu file, edit, shortcut;
+    private JMenuItem open, save, newFile, cut, copy, paste, delFile, ctrlF, cmdF;
     private JTextPane textPane;
     private JButton boldButton, italicButton, underlineButton;
     //private JTextArea textArea;
@@ -59,15 +60,24 @@ public class TextEaseGUI {
 
         edit = new JMenu("Edit");
 
-        tts = new JMenu("TTS");
+        shortcut = new JMenu("Shortcuts");
 
         open = new JMenuItem("Open");
         save = new JMenuItem("Save");
         newFile = new JMenuItem("New");
+        delFile = new JMenuItem("Delete");
 
-        cut = new JMenuItem("Cut");
-        copy = new JMenuItem("Copy");
-        paste = new JMenuItem("Paste");
+        cut = new JMenuItem(new DefaultEditorKit.CutAction());
+        copy = new JMenuItem(new DefaultEditorKit.CopyAction());
+        paste = new JMenuItem(new DefaultEditorKit.PasteAction());
+        
+        //set the text
+        cut.setText("Cut");
+        copy.setText("Copy");
+        paste.setText("Paste");
+        
+        ctrlF = new JMenuItem("Ctrl + F (win):  to search");
+        cmdF = new JMenuItem("Cmd + F (macOS): to search");
 
         //text pane
         textPane = new JTextPane();
@@ -136,14 +146,18 @@ public class TextEaseGUI {
         file.add(open);
         file.add(save);
         file.add(newFile);
+        file.add(delFile);
 
         edit.add(cut);
         edit.add(copy);
         edit.add(paste);
+        
+        shortcut.add(ctrlF);
+        shortcut.add(cmdF);
 
         menuBar.add(file);
         menuBar.add(edit);
-        menuBar.add(tts);
+        menuBar.add(shortcut);
 
         frame.setJMenuBar(menuBar);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -153,6 +167,12 @@ public class TextEaseGUI {
         open.addActionListener(new FileHandling.openFile(textPane));
         // Save file (Mario Shakouri)
         save.addActionListener(new FileHandling.saveFile(frame, textPane));
+
+        //Add new file(Ricardo Quinonez)
+        newFile.addActionListener(new FileHandling.createFile(frame));
+
+        //Delete a file(Ricardo Quinonez)
+        delFile.addActionListener(new FileHandling.deleteFile(frame));
 
         //adding Search feature -Haya
         Search search = new Search(textPane);

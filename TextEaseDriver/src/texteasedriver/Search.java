@@ -86,7 +86,7 @@ public class Search implements KeyListener {
             
         } else {
                 // Handle the case where searchText is null
-                System.out.println("Search text is null.");
+                
             }
         }
     }

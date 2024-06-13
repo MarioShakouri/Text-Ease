@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.PrivateKey;
 
+
 public class RegistrationPortalWindow extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;

@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.net.URL;
+
 
 
 /**
@@ -28,9 +30,11 @@ public class RegistrationWindow {
     private JLabel logoLabel;
 
     public RegistrationWindow() {
-
+        
         //initialize frame
         registrationFrame = new JFrame("Registration Screen");
+          
+       
         //panel with BoxLayout and background color set-ms
         registrationPanel = new JPanel();
         registrationPanel.setLayout(new BoxLayout(registrationPanel, BoxLayout.Y_AXIS));
@@ -92,6 +96,8 @@ public class RegistrationWindow {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //dispose registerWindow first
+                registrationFrame.dispose();
                 //open registration portal window
                 new RegistrationPortalWindow();
             }
@@ -142,5 +148,10 @@ public class RegistrationWindow {
         registrationFrame.setLocationRelativeTo(null);
         registrationFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         registrationFrame.setVisible(true);
+        
+       
+        //add logo 
+            ImageIcon image = new ImageIcon("/src/texteasedriver/logo.png");
+            registrationFrame.setIconImage(image.getImage());
     }
 }
