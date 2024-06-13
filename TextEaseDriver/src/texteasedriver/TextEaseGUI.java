@@ -74,11 +74,6 @@ public class TextEaseGUI {
         textPane.setBackground(new Color(240, 239, 235));
         textPane.setCaretColor(Color.BLACK);
 
-        //textArea = new JTextArea("", 30, 100);
-        //textArea.setBackground(new Color(240, 239, 235));
-        //textArea.setLineWrap(true);
-        //textArea.setWrapStyleWord(true);
-
         //scroll = new JScrollPane(textArea);
         scroll = new JScrollPane(textPane);
 

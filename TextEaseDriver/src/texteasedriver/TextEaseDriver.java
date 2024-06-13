@@ -17,9 +17,7 @@ public class TextEaseDriver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    new RegistrationWindow();
-    new TextToSpeech();
+        new RegistrationWindow();
+        new TextToSpeech();
     }
-    
-    //bruhhhhh humingwaaaa
 }
