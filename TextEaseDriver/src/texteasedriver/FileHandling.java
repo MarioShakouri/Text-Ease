@@ -23,7 +23,7 @@ public class FileHandling {
     private static String filePath = "autosave.txt";
     private static Timer autoSaveTimer;
 
-    public static void autoSaveFunc(JTextPane textArea) {
+    public static boolean autoSaveFunc(JTextPane textArea) {
         int autoSaveInterval = 60000;
         autoSaveTimer = new Timer(autoSaveInterval, new ActionListener() {
             @Override
@@ -32,6 +32,7 @@ public class FileHandling {
             }
         });
         autoSaveTimer.start();
+        return false;
     }
 
     public static void saveToFile(String filePath, String content) {

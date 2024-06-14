@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import texteasedriver.DatabaseConnector;
 
 /**
  *
@@ -22,6 +23,8 @@ public class TextEaseDriver {
      */
 
     public static void main(String[] args) {
+        DatabaseConnector.testConnection();
+
         new RegistrationWindow();
         new TextToSpeech();
     }

@@ -7,9 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TextToSpeechTest {
+    private TextToSpeech tts;
 
     @BeforeEach
     void setUp() {
+        tts = new TextToSpeech();
     }
 
     @AfterEach
@@ -17,6 +19,7 @@ class TextToSpeechTest {
     }
 
     @Test
-    void speak() {
+    void speak() throws Exception {
+        tts.speak("Testing Kevin");
     }
 }

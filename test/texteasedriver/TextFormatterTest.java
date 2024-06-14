@@ -45,9 +45,19 @@ class TextFormatterTest {
 
     @Test
     void underline() {
+        TextFormatter.underline(textPane);
+        StyledDocument doc = textPane.getStyledDocument();
+        AttributeSet as = doc.getCharacterElement(0).getAttributes();
+        assertTrue(StyleConstants.isUnderline(as), "Selected Text should be UNDERLINED!");
     }
 
     @Test
     void fontSize() {
+        int expectedFontSize = 20;
+        TextFormatter.fontSize(textPane, expectedFontSize);
+        StyledDocument doc = textPane.getStyledDocument();
+        AttributeSet as = doc.getCharacterElement(0).getAttributes();
+        int actualFontSize = StyleConstants.getFontSize(as);
+        assertEquals(expectedFontSize, actualFontSize, "Selected Text should have the correct FONT SIZE!");
     }
 }
