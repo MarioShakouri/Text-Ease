@@ -58,8 +58,29 @@ class FileHandlingTest {
 
     @Test
     void saveToFile()  {
+        // Set the fixed text to save to file
+        String textToSave = "Save this to a file!";
 
+        // Create a temporary file
+        File tempFile = null;
+        try {
+            tempFile = File.createTempFile("testfile", ".txt");
+            tempFile.deleteOnExit();
+            Files.write(tempFile.toPath(), textToSave.getBytes());
+            assertTrue(tempFile.exists(), "The file should EXIST");
+
+            String content = new String(Files.readAllBytes(tempFile.toPath())).trim();
+            assertEquals(textToSave.trim(), content, "The content of the file should match the expected text");
+
+        } catch (IOException e) {
+            fail("An IOException occurred: " + e.getMessage());
+        } finally {
+            if (tempFile != null) {
+                tempFile.delete();
+            }
+        }
     }
+
 
     @Test
     void chooseSaveLocation() {
