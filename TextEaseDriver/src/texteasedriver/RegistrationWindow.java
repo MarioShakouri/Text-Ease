@@ -9,8 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.net.URL;
-
-
+import texteasedriver.User;
 
 /**
  *
@@ -77,14 +76,35 @@ public class RegistrationWindow {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(usernameField.getText().equals("user")){
+                // GET the username and password entered by the user
+                String username = usernameField.getText();
+                String password = new String(passwordField.getPassword());
+                // Check if the login is successful using the User.logIn method
+                if (User.logIn(username, password)) {
+                    // If login is successful, close the current registration frame
                     registrationFrame.dispose();
+                    // Open the main application window (TextEaseGUI)
                     new TextEaseGUI();
-                } else{
-                    JOptionPane.showMessageDialog(registrationFrame, "Error try again or register now", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // If login fails, show an error message dialog
+                    JOptionPane.showMessageDialog(registrationFrame, "Invalid username or password. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+
+        //previous login code in case you need to go back
+        //  //action listeners
+        //        loginButton.addActionListener(new ActionListener() {
+        //            @Override
+        //            public void actionPerformed(ActionEvent e) {
+        //                if(usernameField.getText().equals("user")){
+        //                    registrationFrame.dispose();
+        //                    new TextEaseGUI();
+        //                } else{
+        //                    JOptionPane.showMessageDialog(registrationFrame, "Error try again or register now", "Error", JOptionPane.ERROR_MESSAGE);
+        //                }
+        //            }
+        //        });
 
         // Register button styling
         JButton registerButton = new JButton("Register");

@@ -9,17 +9,20 @@ import java.security.PrivateKey;
 
 
 public class RegistrationPortalWindow extends JFrame {
+
+    private JFrame registrationFrame;
+    private JPanel registrationPanel;
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton submitButton;
-    private JButton backButton;
+    private JButton backButton, SubmitButton;
 
     public RegistrationPortalWindow() {
 
         //frame
-        setTitle("Registration Portal ");
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Set the window to fit the screen
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        registrationFrame = new JFrame("Registration Portal ");
+        registrationFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Set the window to fit the screen
+        registrationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //panel with BoxLayout and background color
         JPanel registrationPanel = new JPanel();
@@ -62,7 +65,6 @@ public class RegistrationPortalWindow extends JFrame {
         submitButton.setPreferredSize(new Dimension(300,80));
         submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
         //Back button styling
         backButton = new JButton("Back");
         backButton.setBackground(new Color(91,100,118));
@@ -75,13 +77,17 @@ public class RegistrationPortalWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //user input
+                // Get username and password
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
-
-                //registration logic
-                // for now i only have a message when it registers successfully
-                JOptionPane.showMessageDialog(null, "Registration is Successful!");
+                // Check if the create account is successful using the User.createAccount method
+                if (User.createAccount(username, password)) { // Create account with only username and password
+                    JOptionPane.showMessageDialog(registrationFrame, "Congrats! Your account was created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    registrationFrame.dispose();
+                    new RegistrationWindow();
+                } else {
+                    JOptionPane.showMessageDialog(registrationFrame, "The Account creation failed. Please try again!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -89,7 +95,7 @@ public class RegistrationPortalWindow extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                registrationFrame.dispose();
                 new RegistrationWindow();
             }
         });
@@ -115,9 +121,11 @@ public class RegistrationPortalWindow extends JFrame {
         registrationPanel.add(Box.createRigidArea(new Dimension(0,10)));
         registrationPanel.add(backButton);
 
-        //frame setup
-        add(registrationPanel);
-        setVisible(true);
+        // Frame setup
+        registrationFrame.add(registrationPanel);
+        registrationFrame.pack();
+        registrationFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); // to Ensure the window is maximized
+        registrationFrame.setVisible(true);
     }
 
 
