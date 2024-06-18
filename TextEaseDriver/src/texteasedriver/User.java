@@ -5,21 +5,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import texteasedriver.DatabaseConnector;
 
-public class User implements Serializable{
+public class User implements Serializable {
     private String username;
     private String password;
 
-    //for storing user objects
-    private static List<User> userList = new ArrayList<>();
-
-    public User(String firstName, String lastName, String email, String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-
     }
 
     public String getUsername() {
@@ -38,22 +31,10 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    //static connection to object for database connectivity
-    private static Connection connection;
-
-    // Static block to initialize the connection when the class is loaded
-    static {
-        try {
-            connection = DatabaseConnector.getConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     // Method to create a new user account
     public static boolean createAccount(String username, String password) {
         try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement("INSERT INTO mysql.user (username, password) VALUES ( ?, ?)")) {
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO sff (username, password) VALUES (?, ?)")) {
             statement.setString(1, username);
             statement.setString(2, password);
             statement.executeUpdate();
@@ -64,9 +45,10 @@ public class User implements Serializable{
         }
     }
 
+    // Method to log in a user
     public static boolean logIn(String username, String password) {
         try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM mysql.user WHERE BINARY username = ? AND BINARY password = ?")) {
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM sff WHERE username = ? AND password = ?")) {
             statement.setString(1, username);
             statement.setString(2, password);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -77,6 +59,5 @@ public class User implements Serializable{
             return false; // Return false if login fails
         }
     }
-
 }
 
